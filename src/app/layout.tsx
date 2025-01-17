@@ -3,7 +3,7 @@ import { Geist, Geist_Mono, Kanit } from "next/font/google"
 import "./globals.css"
 
 //components
-import Navbar from "./components/Navbar"
+import Sidebar from "./components/sidebar"
 
 const kanit = Kanit({
     subsets: ["thai", "latin"],
@@ -35,7 +35,7 @@ export default function RootLayout({
             <body
                 className={`${kanit.className} antialiased bg-background text-night flex `}
             >
-                <Navbar/>
+                <Sidebar/>
                 <div className="mx-5 mt-5 w-screen flex justify-center">{children}</div>
             </body>
         </html>

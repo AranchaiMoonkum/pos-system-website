@@ -17,7 +17,7 @@ import {
     LockKeyholeOpen,
 } from "lucide-react"
 
-function Navbar() {
+function Sidebar() {
     return (
         <div className="w-[8rem] border bg-white relative rounded-tr-3xl shadow-lg">
             <div className="sticky top-0 flex flex-col items-center justify-around h-screen m-2">
@@ -42,7 +42,7 @@ function Navbar() {
                 <div className="flex flex-col gap-10">
                     <Button
                         variant="ghost"
-                        className="flex-col py-10 hover:bg-transparent"
+                        className="flex-col py-10 hover:bg-transparent hover:text-night"
                     >
                         <Avatar>
                             <AvatarImage src="Kimono.jpeg" />
@@ -97,4 +97,4 @@ function Navbar() {
     )
 }
 
-export default Navbar
+export default Sidebar
