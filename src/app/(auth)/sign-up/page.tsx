@@ -18,25 +18,25 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 
 //icons
-import {  CircleChevronRight  } from "lucide-react"
+import { CircleChevronRight } from "lucide-react"
 
 const signUpSchema = z.object({
     username: z.string().min(1, {
-        message: "กรุณากรอกชื่อผู้ใช้งาน",
+        message: "Please enter your username",
     }),
     email: z.string().email({
-        message: "ที่อยู่อีเมลไม่ถูกต้อง",
+        message: "Please enter a valid email address",
     }),
     password: z.string().min(6, {
-        message: "รหัสผ่านต้องมีความยาวอย่างน้อย 6 ตัวอักษร",
+        message: "Password must be at least 6 characters",
     }),
     phone: z
         .string()
         .regex(/^\d+$/, {
-            message: "หมายเลขโทรศัพท์ต้องเป็นตัวเลขเท่านั้น",
+            message: "Please enter a valid phone number",
         })
         .min(10, {
-            message: "หมายเลขโทรศัพท์ต้องมีอย่างน้อย 10 หลัก",
+            message: "Please enter a valid phone number",
         }),
 })
 
@@ -53,9 +53,8 @@ const SignUp = () => {
         },
     })
 
-    const onSubmit = (data: SignUpFormValues) => {
+    const onSubmit = async (data: SignUpFormValues) => {
         console.log("Sign-up Data:", data)
-        // ฝากทำต่อ
     }
 
     return (
@@ -145,7 +144,7 @@ const SignUp = () => {
                                 href="/sign-in"
                                 className="text-pebble flex gap-2 text-sm self-end cursor-pointer hover:text-night"
                             >
-                                <p>มีบัญชีอยู่แล้ว</p>
+                                <p>Already have account?</p>
                                 <CircleChevronRight />
                             </Link>
                         </div>
