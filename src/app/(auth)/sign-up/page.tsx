@@ -19,6 +19,7 @@ import { Button } from "@/components/ui/button"
 
 //icons
 import { CircleChevronRight } from "lucide-react"
+import { useState } from "react"
 
 const signUpSchema = z.object({
     username: z.string().min(1, {
@@ -36,13 +37,19 @@ const signUpSchema = z.object({
             message: "Please enter a valid phone number",
         })
         .min(10, {
-            message: "Please enter a valid phone number",
+            message: "Phone number must be 10 digits",
+        })
+        .max(10, {
+            message: "Phone number must be 10 digits",
         }),
 })
 
 type SignUpFormValues = z.infer<typeof signUpSchema>
 
 const SignUp = () => {
+    const [error, setError] = useState<string | null>(null)
+    const [success, setSuccess] = useState<string | null>(null)
+
     const form = useForm<SignUpFormValues>({
         resolver: zodResolver(signUpSchema),
         defaultValues: {
@@ -54,7 +61,29 @@ const SignUp = () => {
     })
 
     const onSubmit = async (data: SignUpFormValues) => {
-        console.log("Sign-up Data:", data)
+        try {
+            setError(null)
+            setSuccess(null)
+
+            const res = await fetch("/api/auth/sign-up", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data),
+            })
+
+            const responseData = await res.json()
+
+            if (!res.ok) {
+                setError(responseData.message)
+                return
+            }
+
+            setSuccess("User created successfully")
+            form.reset()
+        } catch (error: any) {
+            console.log("Client error:", error)
+            setError("Failed to connect to the server. Please try again.")
+        }
     }
 
     return (
@@ -63,6 +92,21 @@ const SignUp = () => {
                 <h1 className="font-semibold text-4xl text-jade mb-5">
                     Sign Up
                 </h1>
+
+                {/* Display error message */}
+                {error && (
+                    <div className="mb-4 p-4 text-red-700 bg-red-100 border border-red-300 rounded-md">
+                        {error}
+                    </div>
+                )}
+
+                {/* Display success message */}
+                {success && (
+                    <div className="mb-4 p-4 text-green-700 bg-green-100 border border-green-300 rounded-md">
+                        {success}
+                    </div>
+                )}
+
                 <Form {...form}>
                     <form
                         onSubmit={form.handleSubmit(onSubmit)}
