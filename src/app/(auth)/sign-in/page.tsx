@@ -18,11 +18,11 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 
 //icons
-import { CircleChevronRight, Facebook } from "lucide-react"
+import { CircleChevronRight } from "lucide-react"
 
 const signInSchema = z.object({
     email: z.string().email({
-        message: "ที่อยู่อีเมลไม่ถูกต้อง",
+        message: "Invalid email address",
     }),
     password: z.string(),
 })
@@ -40,7 +40,6 @@ const SignIn = () => {
 
     const onSubmit = (data: SignInFormValues) => {
         console.log("Sign-in Data:", data)
-        // ฝากทำต่อ
     }
 
     return (
@@ -98,19 +97,9 @@ const SignIn = () => {
                                 href="/sign-up"
                                 className="text-pebble flex gap-2 text-sm self-end cursor-pointer hover:text-night"
                             >
-                                <p>ยังไม่มีบัญชี?</p>
+                                <p>Do not have account?</p>
                                 <CircleChevronRight />
                             </Link>
-
-                            <div className="border-b relative flex items-center justify-center">
-                                <div className="absolute text-pebble top-0.5 bg-white px-3 -translate-y-1/2 rounded-full">
-                                    OR
-                                </div>
-                            </div>
-                            <Button className="w-full bg-blue-800 py-5">
-                                <Facebook />
-                                Sign In With Facebook
-                            </Button>
                         </div>
                     </form>
                 </Form>
