@@ -82,7 +82,7 @@ const SignUp = () => {
             form.reset()
         } catch (error: any) {
             console.log("Client error:", error)
-            setError("Failed to connect to the server. Please try again.")
+            setError("Failed to connect to the server. Please try again." + error)
         }
     }
 
