@@ -18,6 +18,7 @@ export default {
                 pebble: "#747474",
                 fog: "#D9D9D9",
                 amber: "#AF7D18",
+                aqua: "#425AB0",
                 card: {
                     DEFAULT: "hsl(var(--card))",
                     foreground: "hsl(var(--card-foreground))",
