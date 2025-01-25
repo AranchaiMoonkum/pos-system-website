@@ -36,7 +36,7 @@ export default function RootLayout({
                 className={`${kanit.className} antialiased bg-background text-night flex `}
             >
                 <Sidebar/>
-                <div className="mx-5 mt-5 w-screen flex justify-center">{children}</div>
+                <div className="mx-5 mt-5 w-screen flex justify-center text-xl">{children}</div>
             </body>
         </html>
     )
