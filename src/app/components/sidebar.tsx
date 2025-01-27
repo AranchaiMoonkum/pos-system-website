@@ -142,7 +142,8 @@ function Sidebar() {
                                 <LockKeyhole />
                                 <span>Sign up</span>
                             </Button>
-                        </Link>
+                            </Link>
+                            
                         <Link
                             href="/sign-in"
                             className="w-full flex justify-center"
