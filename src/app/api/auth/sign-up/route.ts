@@ -3,7 +3,7 @@ import bcrypt from "bcrypt"
 
 export async function POST(req: Request) {
     try {
-        const { username, email, password, phone } = await req.json()
+        const { email, password, phone } = await req.json()
 
         // check for existing email
         const existingEmail = await prisma.user.findUnique({
@@ -12,17 +12,6 @@ export async function POST(req: Request) {
         if (existingEmail) {
             return Response.json(
                 { message: "Email already exists" },
-                { status: 400 }
-            )
-        }
-
-        // check for existing username
-        const existingUsername = await prisma.user.findUnique({
-            where: { username }
-        })
-        if (existingUsername) {
-            return Response.json(
-                { message: "Username already exists" },
                 { status: 400 }
             )
         }
@@ -42,7 +31,6 @@ export async function POST(req: Request) {
         const hashedPassword = await bcrypt.hash(password, 10)
         const newUser = await prisma.user.create({
             data: {
-                username,
                 email,
                 password: hashedPassword,
                 phone,
