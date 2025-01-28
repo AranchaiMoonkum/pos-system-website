@@ -38,8 +38,8 @@ export default function overall() {
                 <div className="flex items-center">
                     <ChartColumnBig size={52} className="text-jade" />
                     <CardHeader>
-                        <CardTitle>ยอดขายสุทธิ</CardTitle>
-                        <CardDescription>Net Sales</CardDescription>
+                        <CardTitle>Net Sales</CardTitle>
+                        <CardDescription>ยอดขายสุทธิ</CardDescription>
                     </CardHeader>
                 </div>
                 <CardFooter className="justify-end text-2xl text-jade">
@@ -50,8 +50,8 @@ export default function overall() {
                 <div className="flex items-center">
                     <HandCoins size={52} className="text-amber" />
                     <CardHeader>
-                        <CardTitle>ค่าใช้จ่ายสุทธิ</CardTitle>
-                        <CardDescription>Net Expenses</CardDescription>
+                        <CardTitle>Net Expenses</CardTitle>
+                        <CardDescription>ค่าใช้จ่ายสุทธิ</CardDescription>
                     </CardHeader>
                 </div>
                 <CardFooter className="justify-end text-2xl text-amber">
@@ -62,8 +62,8 @@ export default function overall() {
                 <div className="flex items-center">
                     <Wallet size={52} className="text-aqua" />
                     <CardHeader>
-                        <CardTitle>กำไรขั้นต้น</CardTitle>
-                        <CardDescription>Gross Profit</CardDescription>
+                        <CardTitle>Gross Profit</CardTitle>
+                        <CardDescription>กำไรขั้นต้น</CardDescription>
                     </CardHeader>
                 </div>
                 <CardFooter className="justify-end text-2xl text-aqua">
@@ -74,8 +74,8 @@ export default function overall() {
                 <div className="flex items-center">
                     <ScrollText size={52} />
                     <CardHeader>
-                        <CardTitle>จำนวนออเดอร์</CardTitle>
-                        <CardDescription>Number Of Orders</CardDescription>
+                        <CardTitle>Number Of Orders</CardTitle>
+                        <CardDescription>จำนวนออเดอร์</CardDescription>
                     </CardHeader>
                 </div>
                 <CardFooter className="justify-end text-2xl">
@@ -86,10 +86,10 @@ export default function overall() {
                 <Table>
                     <TableHeader>
                         <TableRow>
-                            <TableHead>รูปแบบการสั่ง</TableHead>
-                            <TableHead>จำนวนรายการ</TableHead>
-                            <TableHead>รายได้</TableHead>
-                            <TableHead>กำไร</TableHead>
+                            <TableHead>Order Type</TableHead>
+                            <TableHead>Number of Items</TableHead>
+                            <TableHead>Revenue</TableHead>
+                            <TableHead>Profit</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -104,7 +104,6 @@ export default function overall() {
                     </TableBody>
                 </Table>
             </div>
-            
         </div>
     )
 }

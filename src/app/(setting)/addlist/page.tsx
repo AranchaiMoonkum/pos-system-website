@@ -1,5 +1,4 @@
 // ui
-
 import CategoryForm from "@/app/(setting)/addlist/_components/CategoryForm"
 import AddCategoryTable from "@/app/(setting)/addlist/_components/CategoryTable"
 
@@ -18,3 +17,5 @@ export default function AddCategoryPage() {
         </div>
     )
 }
+
+export default addlist

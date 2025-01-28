@@ -19,9 +19,9 @@ import {
 } from "@/components/ui/chart"
 
 const chartData = [
-    { category: "ยอดขายสุทธิ", value: 1350, fill: "#2F4F4F" },
-    { category: "ค่าใช้จ่ายสุทธิ", value: 2000, fill: "#AF7D18" },
-    { category: "กำไรขั้นต้น", value: 500, fill: "#425AB0" },
+    { category: "Net Sales", value: 1350, fill: "#2F4F4F" },
+    { category: "Net Expenses", value: 2000, fill: "#AF7D18" },
+    { category: "Gross Profit", value: 500, fill: "#425AB0" },
 ]
 
 const chartConfig = {
@@ -29,15 +29,15 @@ const chartConfig = {
         label: "Value",
     },
     netSales: {
-        label: "ยอดขายสุทธิ",
+        label: "Net Sales",
         color: "#2F4F4F",
     },
     netExpenses: {
-        label: "ค่าใช้จ่ายสุทธิ",
+        label: "Net Expenses",
         color: "#AF7D18",
     },
     grossProfit: {
-        label: "กำไรขั้นต้น",
+        label: "Gross Profit",
         color: "#425AB0",
     },
 } satisfies ChartConfig
@@ -49,15 +49,15 @@ export function RoundChart() {
 
     // คำนวณเปอร์เซ็นต์กำไรต่อยอดขาย
     const netSales =
-        chartData.find((item) => item.category === "ยอดขายสุทธิ")?.value || 0
+        chartData.find((item) => item.category === "Net Sales")?.value || 0
     const grossProfit =
-        chartData.find((item) => item.category === "กำไรขั้นต้น")?.value || 0
+        chartData.find((item) => item.category === "Gross Profit")?.value || 0
     const profitMargin = ((grossProfit / netSales) * 100).toFixed(2) // คำนวณเปอร์เซ็นต์กำไร
 
     return (
         <Card className="flex flex-col row-span-4">
             <CardHeader className="items-center pb-0">
-                <CardTitle>ภาพรวม</CardTitle>
+                <CardTitle>Overview</CardTitle>
                 <CardDescription>January - June 2024</CardDescription>
             </CardHeader>
             <CardContent className="flex-1 pb-0">
@@ -133,7 +133,7 @@ export function RoundChart() {
                 </div>
                 {/* แสดงกำไรต่อยอดขาย */}
                 <div className="flex items-center gap-2 text-night font-medium leading-none">
-                    กำไรต่อยอดขาย: {profitMargin}%
+                    Profit Margin: {profitMargin}%
                 </div>
             </CardFooter>
         </Card>

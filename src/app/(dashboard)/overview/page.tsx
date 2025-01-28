@@ -1,4 +1,5 @@
 import React from "react"
+import MonthPicker from "@/app/components/monthPicker"
 
 //ui
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -7,7 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Overall from "./components/overall"
 import Order from "./components/order"
 import BSM from "./components/bsm"
-import { DatePickerWithRange } from "@/app/components/dateRangePicker"
+
 
 //icons
 import { LaptopMinimal } from "lucide-react"
@@ -20,20 +21,18 @@ export default function Overview() {
                     <TabsList>
                         <TabsTrigger value="overview" className="gap-5 px-10">
                             <LaptopMinimal />
-                            ภาพรวม
+                            Overview
                         </TabsTrigger>
                         <TabsTrigger value="order" className="gap-5 px-10">
                             <LaptopMinimal />
-                            ออเดอร์
+                            Orders
                         </TabsTrigger>
                         <TabsTrigger value="bsm" className="gap-5 px-10">
                             <LaptopMinimal />
-                            เมนูขายดี
+                            Best-Selling Menu
                         </TabsTrigger>
                     </TabsList>
-                    
-                        <DatePickerWithRange />
-                    
+                    <MonthPicker />
                 </div>
                 <div>
                     <TabsContent value="overview">
