@@ -50,13 +50,13 @@ function Sidebar() {
                                 </Button>
                             </Link>
                             <Link
-                                href="/neworder"
+                                href="/new-order"
                                 className="w-full flex justify-center"
                             >
                                 <Button
                                     variant="ghost"
                                     className={`flex-col py-10 w-full ${
-                                        isActive("/neworder")
+                                        isActive("/new-order")
                                             ? "bg-jade text-white"
                                             : "text-pebble"
                                     }`}
