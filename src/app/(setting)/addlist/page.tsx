@@ -2,8 +2,7 @@
 import CategoryForm from "@/app/(setting)/addlist/_components/CategoryForm"
 import AddCategoryTable from "@/app/(setting)/addlist/_components/CategoryTable"
 
-
-export default function AddCategoryPage() {
+const AddCategoryPage = () => {
     return (
         <div className="bg-white p-5 rounded-xl w-full">
             <h1 className="text-2xl font-semibold flex justify-center">
@@ -18,4 +17,4 @@ export default function AddCategoryPage() {
     )
 }
 
-export default addlist
+export default AddCategoryPage
