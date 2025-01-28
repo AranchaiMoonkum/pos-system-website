@@ -5,6 +5,7 @@ export async function deleteCategory(id: string) {
         console.error("Failed to delete category")
     } else {
         console.log("Category deleted successfully")
+        location.reload()
     }
 
     return res.json()

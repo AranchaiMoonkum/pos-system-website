@@ -23,7 +23,6 @@ const CategoryFormSchema = z.object({
 
 const CategoryForm = () => {
     const [error, setError] = useState<string | null>(null)
-    const [success, setSuccess] = useState<string | null>(null)
 
     const form = useForm<z.infer<typeof CategoryFormSchema>>({
         resolver: zodResolver(CategoryFormSchema),
@@ -33,7 +32,6 @@ const CategoryForm = () => {
     const onSubmit = async (value: z.infer<typeof CategoryFormSchema>) => {
         try {
             setError(null)
-            setSuccess(null)
 
             const res = await fetch("/api/category", {
                 method: "POST",
@@ -47,8 +45,8 @@ const CategoryForm = () => {
                 setError(resData.message || "Failed to create category")
                 return
             } else {
-                setSuccess("Category created successfully")
                 form.reset()
+                location.reload()
             }
         } catch (error) {
             console.log("Failed to create category. " + error)
@@ -62,13 +60,6 @@ const CategoryForm = () => {
             {error && (
                 <div className="mb-4 p-4 text-red-700 bg-red-100 border border-red-300 rounded-md">
                     {error}
-                </div>
-            )}
-
-            {/* Display success message */}
-            {success && (
-                <div className="mb-4 p-4 text-green-700 bg-green-100 border border-green-300 rounded-md">
-                    {success}
                 </div>
             )}
 
