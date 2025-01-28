@@ -33,7 +33,7 @@ function Sidebar() {
                     // Logged-in view
                     <>
                         <div className="flex flex-col gap-10 items-center">
-                            <Link href="/restaurant">
+                            <Link href="/user">
                                 <Button
                                     variant="none"
                                     className="flex-col py-10 text-pebble"
@@ -62,7 +62,7 @@ function Sidebar() {
                                     }`}
                                 >
                                     <Plus />
-                                    <span>ออเดอร์ใหม่</span>
+                                    <span>New Order</span>
                                 </Button>
                             </Link>
                         </div>
@@ -80,7 +80,7 @@ function Sidebar() {
                                     }`}
                                 >
                                     <LaptopMinimal />
-                                    <span>ภาพรวม</span>
+                                    <span>Overview</span>
                                 </Button>
                             </Link>
                             <Link
@@ -96,23 +96,23 @@ function Sidebar() {
                                     }`}
                                 >
                                     <BookMarked />
-                                    <span>เมนู</span>
+                                    <span>Menu</span>
                                 </Button>
                             </Link>
                             <Link
-                                href="/inventory"
+                                href="/storage"
                                 className="w-full flex justify-center"
                             >
                                 <Button
                                     variant="ghost"
                                     className={`flex-col py-10 w-full ${
-                                        isActive("/inventory")
+                                        isActive("/storage")
                                             ? "bg-jade text-white"
                                             : "text-pebble"
                                     }`}
                                 >
                                     <CookingPot />
-                                    <span>คลัง</span>
+                                    <span>Storage</span>
                                 </Button>
                             </Link>
                         </div>
@@ -130,7 +130,7 @@ function Sidebar() {
                                     }`}
                                 >
                                     <Utensils />
-                                    <span>ร้านอาหาร</span>
+                                    <span>Restaurant</span>
                                 </Button>
                             </Link>
                         </div>

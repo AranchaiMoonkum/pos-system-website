@@ -60,16 +60,16 @@ export default function Menu() {
 
     return (
         <div className="bg-white p-5 rounded-xl w-full">
-            <h1 className="text-2xl font-semibold flex justify-center">เมนู</h1>
+            <h1 className="text-2xl font-semibold flex justify-center">Menu</h1>
             <hr className="my-3" />
             <div className="flex justify-between items-center mb-4">
-                <h2 className="">รายการทั้งหมด {filteredMenu.length} รายการ</h2>
+                <h2 className="">Total {filteredMenu.length} orders</h2>
 
                 <div className="flex items-center gap-4 border p-1 rounded-lg bg-fog text-base">
                     <Search className="text-pebble" />
                     <input
                         type="text"
-                        placeholder="ค้นหาเมนู"
+                        placeholder="Search..."
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                         className="outline-none bg-transparent placeholder:text-pebble"
@@ -80,11 +80,11 @@ export default function Menu() {
             <Table>
                 <TableHeader>
                     <TableRow>
-                        <TableHead>เมนู</TableHead>
-                        <TableHead>หมวดหมู่</TableHead>
-                        <TableHead>ต้นทุน</TableHead>
-                        <TableHead>ราคา</TableHead>
-                        <TableHead>กำไร</TableHead>
+                        <TableHead>Menu</TableHead>
+                        <TableHead>Category</TableHead>
+                        <TableHead>Cost</TableHead>
+                        <TableHead>Price</TableHead>
+                        <TableHead>Profit</TableHead>
                         <TableHead></TableHead>
                     </TableRow>
                 </TableHeader>
