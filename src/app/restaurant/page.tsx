@@ -15,10 +15,10 @@ export default function Profile() {
             </h1>
             <hr className="my-3" />
             <div className="flex text-pebble">
-                <Link href="/addmenu" className="flex justify-center">
+                <Link href="/user" className="flex justify-center">
                     <Button variant="ghost" className="flex-col py-10 w-full">
-                        <BookPlus />
-                        <span>เพิ่มเมนู</span>
+                        <UserRoundPen />
+                        <span>แก้ไขโปรไฟล์</span>
                     </Button>
                 </Link>
                 <Link href="/addlist" className="flex justify-center">
@@ -27,10 +27,10 @@ export default function Profile() {
                         <span>เพิ่มหมวดหมู่</span>
                     </Button>
                 </Link>
-                <Link href="/user" className="flex justify-center">
+                <Link href="/addmenu" className="flex justify-center">
                     <Button variant="ghost" className="flex-col py-10 w-full">
-                        <UserRoundPen />
-                        <span>แก้ไขโปรไฟล์</span>
+                        <BookPlus />
+                        <span>เพิ่มเมนู</span>
                     </Button>
                 </Link>
             </div>
