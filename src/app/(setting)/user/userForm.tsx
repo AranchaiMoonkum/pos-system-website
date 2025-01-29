@@ -8,7 +8,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Label } from "@/components/ui/label"
 
 // icons
-import { Sandwich, SquarePen } from "lucide-react"
+import { User, SquarePen } from "lucide-react"
 
 const UserForm = () => {
     const [userImage, setUserImage] = useState<string | null>(null)
@@ -47,7 +47,7 @@ const UserForm = () => {
                             />
                         ) : (
                             <AvatarFallback className="rounded-md">
-                                <Sandwich />
+                                <User size={100}/>
                             </AvatarFallback>
                         )}
 

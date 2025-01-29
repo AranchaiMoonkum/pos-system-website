@@ -5,7 +5,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 
 //icons
-import { BookPlus, Grid2X2Plus } from "lucide-react"
+import { BookPlus, Grid2X2Plus, LogOut } from "lucide-react"
 
 export default function Profile() {
     return (
@@ -15,7 +15,6 @@ export default function Profile() {
             </h1>
             <hr className="my-3" />
             <div className="flex text-pebble gap-5">
-                
                 <Link href="/addlist" className="flex justify-center">
                     <Button variant="ghost" className="flex-col py-10 w-full">
                         <Grid2X2Plus />
@@ -26,6 +25,15 @@ export default function Profile() {
                     <Button variant="ghost" className="flex-col py-10 w-full">
                         <BookPlus />
                         <span>Add Menu</span>
+                    </Button>
+                </Link>
+                <Link href="/" className="flex justify-center">
+                    <Button
+                        variant="destructive"
+                        className="flex-col py-10 w-full"
+                    >
+                        <LogOut />
+                        <span>Log Out</span>
                     </Button>
                 </Link>
             </div>
