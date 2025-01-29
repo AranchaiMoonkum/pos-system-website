@@ -1,15 +1,15 @@
 "use client"
 
-import React from "react"
+import React, { useEffect, useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useSession } from "next-auth/react"
 
-//ui
+// ui
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 
-//icons
+// icons
 import {
     User,
     Plus,
@@ -21,10 +21,31 @@ import {
     LockKeyholeOpen,
 } from "lucide-react"
 
+type UserProfile = {
+    name: string
+    image: string
+}
+
 function Sidebar() {
     const pathname = usePathname()
     const isActive = (href: string) => pathname === href
     const { data: session } = useSession()
+
+    const [user, setUser] = useState<UserProfile | null>(null);
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                const res = await fetch("/api/user")
+                const data = await res.json()
+                setUser(data)
+            } catch (error) {
+                console.error("Failed to fetch user. " + error)
+            }
+        }
+
+        fetchUser()
+    }, [])
 
     return (
         <div className="w-[8rem] border bg-white relative rounded-tr-3xl shadow-lg">
@@ -40,13 +61,13 @@ function Sidebar() {
                                 >
                                     <Avatar>
                                         <AvatarImage
-                                            src={session.user?.image || ""}
+                                            src={user?.image}
                                         />
                                         <AvatarFallback>
                                             <User />
                                         </AvatarFallback>
                                     </Avatar>
-                                    <p>{session.user?.name || "Profile"}</p>
+                                    <p>{user?.name || "Profile"}</p>
                                 </Button>
                             </Link>
                             <Link
