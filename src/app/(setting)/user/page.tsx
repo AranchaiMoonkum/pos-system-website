@@ -1,9 +1,18 @@
-import React from 'react';
-import UserForm from './userForm';
+import UserForm from "@/app/(setting)/user/_components/UserForm"
 
-const user = () => {
-    return <UserForm/>
-    
+const UserPage = () => {
+    return (
+        <div className="w-full">
+            <div className="bg-white p-5 rounded-xl">
+                <h1 className=" text-2xl font-semibold flex justify-center">
+                    Profile
+                </h1>
+                <hr className="my-3" />
+
+                <UserForm />
+            </div>
+        </div>
+    )
 }
 
-export default user;
+export default UserPage
