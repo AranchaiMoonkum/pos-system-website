@@ -1,5 +1,7 @@
 "use client"
+
 import React, { useState } from "react"
+import { updateProfile } from "@/app/(setting)/user/_actions/profile"
 
 // ui
 import { Input } from "@/components/ui/input"
@@ -12,8 +14,6 @@ import { Sandwich, SquarePen } from "lucide-react"
 
 const UserForm = () => {
     const [userImage, setUserImage] = useState<string | null>(null)
-    const [posName, setPosName] = useState<string>("")
-    const [tel, setTel] = useState<string>("")
 
     const handleUserChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0]
@@ -24,19 +24,31 @@ const UserForm = () => {
     }
 
     return (
-        <div className="w-full">
-            <div className="bg-white p-5 rounded-xl">
-                <h1 className="text-2xl font-semibold flex justify-center">
-                    Profile
-                </h1>
-                <hr className="my-3" />
-                <form className="flex h-5/6 gap-5">
+        <div>
+            <form action={updateProfile} className="flex flex-col gap-5">
+                {/* Store name */}
+                <div className="space-y-2">
+                    <Label htmlFor="name">Store Name :</Label>
+                    <Input type="text" id="name" name="name" placeholder="Insert your store name here" required />
+                </div>
+
+                {/* Telephone number */}
+                <div className="space-y-2">
+                    <Label htmlFor="tel">Telephone Number :</Label>
+                    <Input type="tel" id="tel" name="tel" placeholder="Insert your telephone name here" required />
+                </div>
+
+                {/* Upload image */}
+                <div className="flex justify-center">
                     <Avatar className="rounded-md w-[30rem] h-[30rem] relative group">
                         <Input
                             type="file"
+                            id="image"
+                            name="image"
                             accept="image/*"
                             className="absolute top-0 left-0 w-full cursor-pointer z-10 h-full opacity-0"
                             onChange={handleUserChange}
+                            required
                         />
 
                         {userImage ? (
@@ -55,38 +67,11 @@ const UserForm = () => {
                             <SquarePen />
                         </div>
                     </Avatar>
-
-                    <div className="flex flex-col gap-4 w-full justify-between">
-                        <div className="flex flex-col gap-4">
-                            <div className="flex gap-3 items-center ">
-                                <Label>Store Name :</Label>
-                                <Input
-                                    name="posname"
-                                    value={posName}
-                                    onChange={(e) => setPosName(e.target.value)}
-                                />
-                            </div>
-
-                            <div className="flex gap-3 items-center">
-                                <Label>Tel Number :</Label>
-                                <Input
-                                    name="tel"
-                                    value={tel}
-                                    onChange={(e) => setTel(e.target.value)}
-                                    placeholder=""
-                                />
-                            </div>
-                        </div>
-                        <Button
-                            variant="default"
-                            type="submit"
-                            className="py-8 text-xl"
-                        >
-                            Update
-                        </Button>
-                    </div>
-                </form>
-            </div>
+                </div>
+            
+                {/* Update button */}
+                <Button variant="default" type="submit" className="py-6 text-xl">Update</Button>
+            </form>
         </div>
     )
 }
