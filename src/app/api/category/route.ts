@@ -11,19 +11,8 @@ export async function POST(req: Request) {
         }
 
         const userId = session.user.id
+
         const { name } = await req.json()
-
-        // check for existing category
-        const existingCategory = await prisma.category.findUnique({
-            where: { name: name }
-        })
-
-        if (existingCategory) {
-            return Response.json({
-                message: "Category already exists",
-                category: existingCategory
-            }, { status: 409 })
-        }
 
         // create new category
         const category = await prisma.category.create({
@@ -48,7 +37,16 @@ export async function POST(req: Request) {
 
 export async function GET() {
     try {
+        const session = await getServerSession(authOptions)
+
+        if (!session || !session.user) {
+            throw new Error("Session not found")
+        }
+
+        const userId = session.user.id
+
         const categories = await prisma.category.findMany({
+            where: { createdBy: { id: userId } },
             include: { createdBy: true }
         })
 
