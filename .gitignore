@@ -19,6 +19,7 @@
 
 # photos
 public/menus/
+public/user-profiles
 
 # production
 /build
