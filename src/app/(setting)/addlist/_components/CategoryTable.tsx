@@ -48,7 +48,6 @@ const CategoryTable = () => {
             <Table>
                 <TableHeader>
                     <TableRow>
-                        <TableHead>Name</TableHead>
                         <TableHead>Category Name</TableHead>
                         <TableHead>Created By</TableHead>
                         <TableHead>Created At</TableHead>
@@ -60,7 +59,6 @@ const CategoryTable = () => {
                 <TableBody>
                     {categories.map((category) => (
                         <TableRow key={category.id}>
-                            <TableCell>{category.id}</TableCell>
                             <TableCell>{category.name}</TableCell>
                             <TableCell>{category.createdBy?.email || "N/A"}</TableCell>
                             <TableCell>{new Date(category.createdAt).toLocaleDateString()}</TableCell>

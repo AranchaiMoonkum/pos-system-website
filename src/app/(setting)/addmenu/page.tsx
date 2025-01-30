@@ -1,9 +1,23 @@
-import React from 'react';
-import AddMenuForm from "./addMenuForm"
+import React from "react"
+import { AddMenuForm } from "@/app/(setting)/addmenu/_components/AddMenuForm"
 
-const addmenu = () => {
-    return <AddMenuForm/>
-    
+// ui
+
+
+const AddMenuPage = () => {
+    return (
+        <div className="w-full">
+            <div className="bg-white p-5 rounded-xl">
+                <h1 className="text-2xl font-semibold flex justify-center">
+                    Add Menu
+                </h1>
+                <hr className="my-3" />
+
+                {/* Add Menu Form */}
+                <AddMenuForm />
+            </div>
+        </div>
+    )
 }
 
-export default addmenu;
+export default AddMenuPage
