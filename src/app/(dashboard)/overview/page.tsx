@@ -1,5 +1,4 @@
 import React from "react"
-import MonthPicker from "@/app/components/monthPicker"
 
 //ui
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -8,7 +7,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Overall from "./components/overall"
 import Order from "./components/order"
 import BSM from "./components/bsm"
-
 
 //icons
 import { LaptopMinimal } from "lucide-react"
@@ -32,7 +30,6 @@ export default function Overview() {
                             Best-Selling Menu
                         </TabsTrigger>
                     </TabsList>
-                    <MonthPicker />
                 </div>
                 <div>
                     <TabsContent value="overview">
