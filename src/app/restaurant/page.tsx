@@ -1,5 +1,8 @@
+"use client"
+
 import React from "react"
 import Link from "next/link"
+import { signOut } from "next-auth/react"
 
 //ui
 import { Button } from "@/components/ui/button"
@@ -31,6 +34,7 @@ export default function Profile() {
                     <Button
                         variant="destructive"
                         className="flex-col py-10 w-full"
+                        onClick={() => { signOut() }}
                     >
                         <LogOut />
                         <span>Log Out</span>
