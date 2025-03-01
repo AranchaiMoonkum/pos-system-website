@@ -1,4 +1,6 @@
 import React from "react"
+import { getServerSession } from "next-auth"
+import authOptions from "@/lib/auth"
 
 // ui
 import {
@@ -17,7 +19,15 @@ import { Sandwich } from "lucide-react"
 import { getBestSellings } from "@/lib/bestSelling"
 
 export default async function bsm() {
-    const bestSellingMenus = await getBestSellings()
+    const session = await getServerSession(authOptions) 
+
+    if (!session || !session.user) {
+        throw new Error("Session not found")
+    }
+
+    const userId = session.user.id
+
+    const bestSellingMenus = await getBestSellings(userId)
 
     return (
         <div className="bg-white p-5 rounded-xl">

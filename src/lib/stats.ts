@@ -1,7 +1,12 @@
 import { prisma } from "@/lib/prisma"
 
-export async function getOverallStats() {
+export async function getOverallStats(userId: string) {
     const orderItem = await prisma.orderItem.findMany({
+        where: {
+            order: {
+                userId: userId,
+            },
+        },
         select: {
             quantity: true,
             price: true,
@@ -22,7 +27,9 @@ export async function getOverallStats() {
     const grossProfit = netSales - netExpenses
 
     // count the total number of orders
-    const orderCount = await prisma.order.count()
+    const orderCount = await prisma.order.count({
+        where: { userId: userId },
+    })
 
     return { netSales, netExpenses, grossProfit, orderCount }
 }

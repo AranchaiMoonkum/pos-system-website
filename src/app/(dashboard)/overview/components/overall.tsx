@@ -1,5 +1,7 @@
 import React from "react"
 import { getOverallStats } from "@/lib/stats"
+import { getServerSession } from "next-auth"
+import authOptions from "@/lib/auth"
 
 // components
 import { RoundChart } from "../ui/piechart"
@@ -22,7 +24,16 @@ import {
 } from "lucide-react"
 
 export default async function overall() {
-    const stats = await getOverallStats()
+    const session = await getServerSession(authOptions)
+
+    if (!session || !session.user) {
+        throw new Error("Session not found")
+    }
+
+    const userId = session.user.id
+
+
+    const stats = await getOverallStats(userId)
 
     return (
         <div className="grid grid-cols-3 grid-rows-4 gap-3">

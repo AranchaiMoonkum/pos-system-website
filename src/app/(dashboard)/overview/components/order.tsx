@@ -1,4 +1,7 @@
 import React from "react"
+import { prisma } from "@/lib/prisma"
+import { getServerSession } from "next-auth"
+import authOptions from "@/lib/auth"
 
 // ui
 import {
@@ -12,10 +15,18 @@ import {
 
 // icons
 import { ReceiptText } from "lucide-react"
-import { prisma } from "@/lib/prisma"
 
 async function getOrders() {
+    const session = await getServerSession(authOptions)
+
+    if (!session || !session.user) {
+        throw new Error("Session not found")
+    }
+
+    const userId = session.user.id
+
     return await prisma.order.findMany({
+        where: { userId: userId },
         include: {
             items: true, // include items in the order
         },
