@@ -25,15 +25,24 @@ async function getOrders() {
 
     const userId = session.user.id
 
-    return await prisma.order.findMany({
+    const ordersAsc = await prisma.order.findMany({
         where: { userId: userId },
         include: {
             items: true, // include items in the order
         },
         orderBy: {
-            createdAt: "desc", // order by created date descending
+            createdAt: "asc", // order by created date descending
         }
     })
+
+    // assign a stable order number based on creation order
+    const numberedOrders = ordersAsc.map((order, index) => ({
+        ...order,
+        orderNumber: index + 1
+    }))
+
+    const ordersDesc = numberedOrders.slice().reverse()
+    return ordersDesc
 }
 
 export default async function order() {
@@ -68,7 +77,7 @@ export default async function order() {
                             <TableRow key={order.id}>
                                 <TableCell className="font-medium flex gap-2">
                                     <ReceiptText />
-                                    Order #{index + 1}
+                                    Order #{order.orderNumber}
                                 </TableCell>
                                 <TableCell>{numberOfItems}</TableCell>
                                 <TableCell>฿{totalPrice.toFixed(2)}</TableCell>
