@@ -17,7 +17,7 @@ model User {
 
     categories Category[]
     menus      Menu[]
-    orders      Order[]
+    orders     Order[]
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
@@ -49,17 +49,33 @@ model Menu {
     categoryId String
     category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
 
+    items OrderItem[]
+
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
-
-    Order Order[]
 }
 
 model Order {
     id String @id @default(cuid())
 
     userId String
-    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+    user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    items OrderItem[]
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model OrderItem {
+    id          String  @id @default(cuid())
+    quantity    Int
+    description String?
+    price       Float
+    cost        Float
+
+    orderId String
+    order   Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
 
     menuId String
     menu   Menu   @relation(fields: [menuId], references: [id], onDelete: Cascade)

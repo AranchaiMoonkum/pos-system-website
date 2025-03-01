@@ -120,22 +120,6 @@ function Sidebar() {
                                     <span>Menu</span>
                                 </Button>
                             </Link>
-                            <Link
-                                href="/storage"
-                                className="w-full flex justify-center"
-                            >
-                                <Button
-                                    variant="ghost"
-                                    className={`flex-col py-10 w-full ${
-                                        isActive("/storage")
-                                            ? "bg-jade text-white"
-                                            : "text-pebble"
-                                    }`}
-                                >
-                                    <CookingPot />
-                                    <span>Storage</span>
-                                </Button>
-                            </Link>
                         </div>
                         <div>
                             <Link

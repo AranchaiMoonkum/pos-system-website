@@ -1,5 +1,5 @@
 import { MenuList } from "@/app/new-order/components/(menu)/MenuList"
-import { CheckOut } from "@/app/new-order/components/(checkout)/CheckOut"
+import CheckOut from "@/app/new-order/components/(checkout)/CheckOut"
 
 const NewOrder = () => {
     return (

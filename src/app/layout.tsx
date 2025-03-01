@@ -6,6 +6,7 @@ import { getServerSession } from "next-auth"
 
 //components
 import Sidebar from "./components/sidebar"
+import { CartProvider } from "@/context/CartContext"
 
 const kanit = Kanit({
     subsets: ["thai", "latin"],
@@ -30,8 +31,10 @@ export default async function RootLayout({
                 className={`${kanit.className} antialiased bg-background text-night flex `}
             >
                 <SessionProvider session={session}>
-                    <Sidebar />
-                    <div className="mx-5 mt-5 w-screen flex justify-center text-xl">{children}</div>
+                    <CartProvider>
+                        <Sidebar />
+                        <div className="mx-5 mt-5 w-screen flex justify-center text-xl">{children}</div>
+                    </CartProvider>
                 </SessionProvider>
             </body>
         </html>

@@ -1,9 +1,10 @@
 import React from "react"
+import { getOverallStats } from "@/lib/stats"
 
-//components
+// components
 import { RoundChart } from "../ui/piechart"
 
-//ui
+// ui
 import {
     Card,
     CardDescription,
@@ -12,28 +13,20 @@ import {
     CardTitle,
 } from "@/components/ui/card"
 
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table"
-
-//icons
+// icons
 import {
     ChartColumnBig,
     HandCoins,
     Wallet,
     ScrollText,
-    ReceiptText,
 } from "lucide-react"
 
-export default function overall() {
+export default async function overall() {
+    const stats = await getOverallStats()
+
     return (
         <div className="grid grid-cols-3 grid-rows-4 gap-3">
-            <RoundChart />
+            <RoundChart stats={stats} />
             <Card className="px-2 ">
                 <div className="flex items-center">
                     <ChartColumnBig size={52} className="text-jade" />
@@ -43,7 +36,7 @@ export default function overall() {
                     </CardHeader>
                 </div>
                 <CardFooter className="justify-end text-2xl text-jade">
-                    <p>฿1350.00</p>
+                    <p>{stats.netSales.toFixed(2)} ฿</p>
                 </CardFooter>
             </Card>
             <Card className="px-2 ">
@@ -55,7 +48,7 @@ export default function overall() {
                     </CardHeader>
                 </div>
                 <CardFooter className="justify-end text-2xl text-amber">
-                    <p>฿2000.00</p>
+                    <p>{stats.netExpenses.toFixed(2)} ฿</p>
                 </CardFooter>
             </Card>
             <Card className="px-2 col-start-2">
@@ -67,7 +60,7 @@ export default function overall() {
                     </CardHeader>
                 </div>
                 <CardFooter className="justify-end text-2xl text-aqua">
-                    <p>฿500.00</p>
+                    <p>{stats.grossProfit.toFixed(2)} ฿</p>
                 </CardFooter>
             </Card>
             <Card className="px-2 col-start-3">
@@ -79,31 +72,9 @@ export default function overall() {
                     </CardHeader>
                 </div>
                 <CardFooter className="justify-end text-2xl">
-                    <p>15</p>
+                    <p>{stats.orderCount}</p>
                 </CardFooter>
             </Card>
-            <div className="col-span-2 row-span-2 col-start-2 row-start-3">
-                <Table>
-                    <TableHeader>
-                        <TableRow>
-                            <TableHead>Order Type</TableHead>
-                            <TableHead>Number of Items</TableHead>
-                            <TableHead>Revenue</TableHead>
-                            <TableHead>Profit</TableHead>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        <TableRow>
-                            <TableCell className="font-medium">
-                                ShopeeFood
-                            </TableCell>
-                            <TableCell>3</TableCell>
-                            <TableCell>฿150.00</TableCell>
-                            <TableCell>24%</TableCell>
-                        </TableRow>
-                    </TableBody>
-                </Table>
-            </div>
         </div>
     )
 }

@@ -6,7 +6,6 @@ import { Label, Pie, PieChart } from "recharts"
 import {
     Card,
     CardContent,
-    CardDescription,
     CardFooter,
     CardHeader,
     CardTitle,
@@ -18,11 +17,11 @@ import {
     ChartTooltipContent,
 } from "@/components/ui/chart"
 
-const chartData = [
-    { category: "Net Sales", value: 1350, fill: "#2F4F4F" },
-    { category: "Net Expenses", value: 2000, fill: "#AF7D18" },
-    { category: "Gross Profit", value: 500, fill: "#425AB0" },
-]
+interface Stats {
+    netSales: number
+    netExpenses: number
+    grossProfit: number
+}
 
 const chartConfig = {
     value: {
@@ -42,23 +41,28 @@ const chartConfig = {
     },
 } satisfies ChartConfig
 
-export function RoundChart() {
+interface RoundChartProps {
+    stats: Stats
+}
+
+export function RoundChart({ stats }: RoundChartProps) {
+    // Build chart data dynamically from the passed stats
+    const chartData = [
+        { category: "Net Sales", value: stats.netSales, fill: chartConfig.netSales.color },
+        { category: "Net Expenses", value: stats.netExpenses, fill: chartConfig.netExpenses.color },
+        { category: "Gross Profit", value: stats.grossProfit, fill: chartConfig.grossProfit.color },
+    ]
+
     const totalValue = React.useMemo(() => {
         return chartData.reduce((acc, curr) => acc + curr.value, 0)
-    }, [])
+    }, [chartData])
 
-    // คำนวณเปอร์เซ็นต์กำไรต่อยอดขาย
-    const netSales =
-        chartData.find((item) => item.category === "Net Sales")?.value || 0
-    const grossProfit =
-        chartData.find((item) => item.category === "Gross Profit")?.value || 0
-    const profitMargin = ((grossProfit / netSales) * 100).toFixed(2) // คำนวณเปอร์เซ็นต์กำไร
+    const profitMargin = stats.netSales ? ((stats.grossProfit / stats.netSales) * 100).toFixed(2) : "0.00"
 
     return (
         <Card className="flex flex-col row-span-4">
             <CardHeader className="items-center pb-0">
                 <CardTitle>Overview</CardTitle>
-                <CardDescription>January - June 2024</CardDescription>
             </CardHeader>
             <CardContent className="flex-1 pb-0">
                 <ChartContainer
@@ -79,11 +83,7 @@ export function RoundChart() {
                         >
                             <Label
                                 content={({ viewBox }) => {
-                                    if (
-                                        viewBox &&
-                                        "cx" in viewBox &&
-                                        "cy" in viewBox
-                                    ) {
+                                    if (viewBox && "cx" in viewBox && "cy" in viewBox) {
                                         return (
                                             <text
                                                 x={viewBox.cx}
@@ -115,23 +115,15 @@ export function RoundChart() {
                 </ChartContainer>
             </CardContent>
             <CardFooter className="flex flex-col gap-6 text-base text-pebble">
-                {/* แสดงข้อมูลสีและหมวดหมู่ */}
                 <div className="flex flex-col gap-3">
                     {chartData.map((item) => (
-                        <div
-                            key={item.category}
-                            className="flex items-center gap-2"
-                        >
-                            <div
-                                className="w-4 h-4 rounded-full"
-                                style={{ backgroundColor: item.fill }}
-                            ></div>
+                        <div key={item.category} className="flex items-center gap-2">
+                            <div className="w-4 h-4 rounded-full" style={{ backgroundColor: item.fill }}></div>
                             <span>{item.category}:</span>
                             <span>{item.value} ฿</span>
                         </div>
                     ))}
                 </div>
-                {/* แสดงกำไรต่อยอดขาย */}
                 <div className="flex items-center gap-2 text-night font-medium leading-none">
                     Profit Margin: {profitMargin}%
                 </div>

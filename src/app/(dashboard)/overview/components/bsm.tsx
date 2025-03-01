@@ -1,6 +1,6 @@
 import React from "react"
 
-//ui
+// ui
 import {
     Table,
     TableBody,
@@ -12,17 +12,20 @@ import {
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
-//icons
+// icons
 import { Sandwich } from "lucide-react"
+import { getBestSellings } from "@/lib/bestSelling"
 
-export default function bsm() {
+export default async function bsm() {
+    const bestSellingMenus = await getBestSellings()
+
     return (
         <div className="bg-white p-5 rounded-xl">
             <h1 className="text-2xl font-semibold flex justify-center">
                 Best-Selling Menu
             </h1>
             <hr className="my-3" />
-            <h2 className="">Total 23 Items</h2>
+            <h2 className="">Total {bestSellingMenus.length} Items</h2>
             <hr className="my-3" />
             <Table>
                 <TableHeader>
@@ -36,25 +39,24 @@ export default function bsm() {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    <TableRow>
-                        <TableCell className="font-medium flex gap-2 items-center">
-                            <Avatar className="rounded-md">
-                                <AvatarImage
-                                    className="rounded-md"
-                                    src="padkrapow.jpg"
-                                />
-                                <AvatarFallback className="rounded-md">
-                                    <Sandwich />
-                                </AvatarFallback>
-                            </Avatar>
-                            ผัดกระเพราหมูสับ
-                        </TableCell>
-                        <TableCell>อาหารจานหลัก</TableCell>
-                        <TableCell>2</TableCell>
-                        <TableCell>฿45.00</TableCell>
-                        <TableCell>฿10.00</TableCell>
-                        <TableCell>20%</TableCell>
-                    </TableRow>
+                    {bestSellingMenus.map((item) => (
+                        <TableRow key={item.menuId}>
+                            <TableCell className="font-medium flex gap-2 items-center">
+                                <Avatar className="rounded-md">
+                                    <AvatarImage className="rounded-md" src={item.image} />
+                                    <AvatarFallback className="rounded-md">
+                                        <Sandwich />
+                                    </AvatarFallback>
+                                </Avatar>
+                                {item.menuName}
+                            </TableCell>
+                            <TableCell>{item.category}</TableCell>
+                            <TableCell>{item.quantity}</TableCell>
+                            <TableCell>฿{item.cost.toFixed(2)}</TableCell>
+                            <TableCell>฿{item.price.toFixed(2)}</TableCell>
+                            <TableCell>{item.profitMargin}%</TableCell>
+                        </TableRow>
+                    ))}
                 </TableBody>
             </Table>
         </div>

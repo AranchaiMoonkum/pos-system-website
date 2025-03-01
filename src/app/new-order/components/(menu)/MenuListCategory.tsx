@@ -8,6 +8,7 @@ import { AvatarFallback } from "@/components/ui/avatar"
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { Sandwich } from "lucide-react"
+import MenuListDialogForm from "./MenuListDialogForm"
 
 const getMenus = async () => {
     const session = await getServerSession(authOptions)
@@ -64,14 +65,7 @@ export async function MenuListCategory() {
                                     </DialogTrigger>
 
                                     {/* dialog popup */}
-                                    <DialogContent>
-                                        <DialogHeader>
-                                            <DialogTitle>{menu.name}</DialogTitle>
-                                            <DialogDescription>
-                                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Id, similique praesentium perspiciatis reprehenderit maxime culpa illum expedita ex beatae sequi.
-                                            </DialogDescription>
-                                        </DialogHeader>
-                                    </DialogContent>
+                                    <MenuListDialogForm menu={menu} />
                                 </Dialog>
                             ))}
                         </div>

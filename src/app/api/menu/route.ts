@@ -61,28 +61,31 @@ export async function POST(req: Request) {
     }
 }
 
-export async function GET() {
+export async function GET(request: Request) {
     try {
+        const { searchParams } = new URL(request.url)
+        const searchQuery = searchParams.get("search") || ""
+
         const session = await getServerSession(authOptions)
         if (!session || !session.user) {
-            return Response.json(
-                { error: "Unauthorized" },
-                { status: 401 }
-            )
+            return Response.json({ error: "Unauthorized" }, { status: 401 })
         }
 
         const userId = session.user.id
 
         const menus = await prisma.menu.findMany({
-            where: { createdBy: { id: userId } },
+            where: {
+                createdBy: { id: userId },
+                ...(searchQuery && {
+                    name: { contains: searchQuery, mode: "insensitive" },
+                }),
+            },
+            include: { category: true },
         })
 
         return Response.json(menus, { status: 200 })
     } catch (error) {
         console.error("Server error:", error)
-        return Response.json(
-            { error: "Something went wrong" },
-            { status: 500 }
-        )
+        return Response.json({ error: "Something went wrong" }, { status: 500 })
     }
 }

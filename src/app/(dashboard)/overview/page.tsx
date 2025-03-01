@@ -1,14 +1,14 @@
 import React from "react"
 
-//ui
+// ui
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
-//components
+// components
 import Overall from "./components/overall"
 import Order from "./components/order"
 import BSM from "./components/bsm"
 
-//icons
+// icons
 import { LaptopMinimal } from "lucide-react"
 
 export default function Overview() {

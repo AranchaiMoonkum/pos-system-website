@@ -29,8 +29,6 @@ export const authOptions: NextAuthOptions = {
                     where: { email: credentials.email }
                 })
 
-                console.log("Fetched user:", user);
-
                 if (!user) {
                     console.error("User not found with email:", credentials.email);
                     throw new Error("Invalid email or password");
@@ -42,8 +40,6 @@ export const authOptions: NextAuthOptions = {
                     console.error("Invalid password for email:", credentials.email);
                     throw new Error("Invalid email or password");
                 }
-
-                console.log("User authenticated successfully:", { id: user.id, email: user.email });
 
                 return { id: user.id, email: user.email };
             }
