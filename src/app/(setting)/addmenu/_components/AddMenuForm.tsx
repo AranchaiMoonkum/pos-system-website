@@ -68,6 +68,10 @@ export const AddMenuForm = () => {
                 setError("Failed to create menu")
             } else {
                 setSuccess("Menu created successfully")
+
+                setTimeout(() => {
+                    location.reload()
+                }, 1000)
             }
         } catch (error) {
             setError("Error submitting form: " + error)

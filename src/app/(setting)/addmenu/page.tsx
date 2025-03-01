@@ -1,8 +1,7 @@
 import React from "react"
-import { AddMenuForm } from "@/app/(setting)/addmenu/_components/AddMenuForm"
 
 // ui
-
+import { AddMenuForm } from "@/app/(setting)/addmenu/_components/AddMenuForm"
 
 const AddMenuPage = () => {
     return (
