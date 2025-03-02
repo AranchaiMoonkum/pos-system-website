@@ -55,7 +55,7 @@ export default function MenuListDialogForm({ menu }: Props) {
             name: menu.name,
             price: menu.price,
             quantity: values.quantity,
-            description: values.description,
+            description: values.description || "",
         })
 
         console.log("Item added to cart:", values)

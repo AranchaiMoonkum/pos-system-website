@@ -18,13 +18,17 @@ interface CartContextType {
 
 const CartContext = createContext<CartContextType | undefined>(undefined)
 
-export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const CartProvider: React.FC<{ children: ReactNode }> = ({
+    children,
+}) => {
     const [cart, setCart] = useState<CartItem[]>([])
 
     const addToCart = (item: CartItem): void => {
         setCart((prevCart) => {
             // check if an item with the same id already exists
-            const existingItemIndex = prevCart.findIndex((cartItem) => cartItem.id === item.id)
+            const existingItemIndex = prevCart.findIndex(
+                (cartItem) => cartItem.id === item.id && cartItem.description === item.description
+            )
 
             if (existingItemIndex !== -1) {
                 // if it exists, update the quantity (and optionally merge/update other properties)
@@ -32,10 +36,13 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
                 updatedCart[existingItemIndex] = {
                     ...updatedCart[existingItemIndex],
-                    quantity: updatedCart[existingItemIndex].quantity + item.quantity,
+                    quantity:
+                        updatedCart[existingItemIndex].quantity + item.quantity,
 
                     // update the description
-                    description: item.description || updatedCart[existingItemIndex].description,
+                    description:
+                        item.description ||
+                        updatedCart[existingItemIndex].description,
                 }
 
                 return updatedCart
@@ -58,7 +65,9 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
 export function useCart(): CartContextType {
     const context = useContext(CartContext)
-    if (!context) { throw new Error("useCart must be used within a CartProvider") }
+    if (!context) {
+        throw new Error("useCart must be used within a CartProvider")
+    }
 
     return context
 }
