@@ -21,8 +21,6 @@ export async function getBestSellings(userId: string) {
         },
         _sum: {
             quantity: true,
-            price: true,
-            cost: true,
         },
         orderBy: {
             _sum: {
@@ -49,30 +47,29 @@ export async function getBestSellings(userId: string) {
         const menu = menus.find((m) => m.id === group.menuId)
         if (!menu) return null
 
-            // calculate average price and cost per unit
-            const avgPrice =
-                group._sum.price && group._sum.quantity
-                    ? group._sum.price / group._sum.quantity
-                    : 0
-                    const avgCost =
-                        group._sum.cost && group._sum.quantity
-                            ? group._sum.cost / group._sum.quantity
-                            : 0
+        // calculate average price and cost per unit
+        const originalPrice = menu.price
+        const originalCost = menu.cost
 
-                            // calculate profit margin: ((price - cost) / price) * 100
-                            const profitMargin =
-                                avgPrice > 0 ? (((avgPrice - avgCost) / avgPrice) * 100).toFixed(2) : "0.00"
+        // calculate profit margin: ((price - cost) / price) * 100
+        const profitMargin =
+            originalPrice > 0
+                ? (
+                      ((originalPrice - originalCost) / originalPrice) *
+                      100
+                  ).toFixed(2)
+                : "0.00"
 
-                            return {
-                                menuId: menu.id,
-                                menuName: menu.name,
-                                category: menu.category.name,
-                                quantity: group._sum.quantity || 0,
-                                cost: avgCost,
-                                price: avgPrice,
-                                profitMargin,
-                                image: menu.image,
-                            }
+        return {
+            menuId: menu.id,
+            menuName: menu.name,
+            category: menu.category.name,
+            quantity: group._sum.quantity || 0,
+            cost: originalCost,
+            price: originalPrice,
+            profitMargin,
+            image: menu.image,
+        }
     })
 
     // filter out any null values (in case of unmatched records)
