@@ -44,7 +44,7 @@ export default function CheckOut() {
                     <p>Your cart is empty.</p>
                 ) : (
                     cart.map((item) => (
-                        <div key={item.id} className="border-b py-2">
+                        <div key={`${item.id}-${item.description}`} className="border-b py-2">
                             <h3 className="font-semibold">{item.name}</h3>
                             <p>Quantity: {item.quantity}</p>
                             {item.description && <p>Description: {item.description}</p>}
