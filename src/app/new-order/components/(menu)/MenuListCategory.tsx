@@ -34,11 +34,11 @@ export async function MenuListCategory() {
 
                     {/* horizontal scroll menu list */}
                     <ScrollArea className="w-full overflow-x-auto pb-4">
-                        <div className="flex gap-4 mt-3 whitespace-nowrap">
+                        <div className="flex gap-4 my-3 py-2 whitespace-nowrap">
                             {category.menus.map(menu => (
                                 <Dialog key={menu.id}>
                                     <DialogTrigger asChild>
-                                        <Card className="border border-gray-300 rounded-xl transition-shadow cursor-pointer min-w-[200px]">
+                                        <Card className="shadow-md rounded-xl transition-shadow cursor-pointer min-w-[200px]">
                                             {/* square menu image */}
                                             <CardContent className="p-0">
                                                 <div className="w-full h-40 overflow-hidden rounded-t-xl flex items-center justify-center bg-gray-100">
