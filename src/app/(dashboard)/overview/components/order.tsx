@@ -12,9 +12,13 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
+import { Dialog, DialogTrigger } from "@/components/ui/dialog"
 
 // icons
 import { ReceiptText } from "lucide-react"
+
+//components
+import OrderItemDialog from "../ui/orderItemDialog"
 
 async function getOrders() {
     const session = await getServerSession(authOptions)
@@ -28,10 +32,10 @@ async function getOrders() {
     const ordersAsc = await prisma.order.findMany({
         where: { userId: userId },
         include: {
-            items: true, // include items in the order
+            items: true,
         },
         orderBy: {
-            createdAt: "asc", // order by created date descending
+            createdAt: "asc",
         }
     })
 
@@ -74,15 +78,22 @@ export default async function order() {
                             0
                         );
                         return (
-                            <TableRow key={order.id}>
-                                <TableCell className="font-medium flex gap-2">
-                                    <ReceiptText />
-                                    Order #{order.orderNumber}
-                                </TableCell>
-                                <TableCell>{numberOfItems}</TableCell>
-                                <TableCell>฿{totalPrice.toFixed(2)}</TableCell>
-                            </TableRow>
-                        );
+                            <Dialog key={order.id}>
+                                <DialogTrigger asChild>
+                                    <TableRow className="cursor-pointer hover:bg-gray-100 transition">
+                                        <TableCell className="font-medium flex gap-2">
+                                            <ReceiptText />
+                                            Order #{order.orderNumber}
+                                        </TableCell>
+                                        <TableCell>{numberOfItems}</TableCell>
+                                        <TableCell>
+                                            ฿{totalPrice.toFixed(2)}
+                                        </TableCell>
+                                    </TableRow>
+                                </DialogTrigger>
+                                <OrderItemDialog order={order} />
+                            </Dialog>
+                        )
                     })}
                 </TableBody>
             </Table>

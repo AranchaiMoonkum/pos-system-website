@@ -83,7 +83,11 @@ export function RoundChart({ stats }: RoundChartProps) {
                         >
                             <Label
                                 content={({ viewBox }) => {
-                                    if (viewBox && "cx" in viewBox && "cy" in viewBox) {
+                                    if (
+                                        viewBox &&
+                                        "cx" in viewBox &&
+                                        "cy" in viewBox
+                                    ) {
                                         return (
                                             <text
                                                 x={viewBox.cx}
@@ -117,10 +121,16 @@ export function RoundChart({ stats }: RoundChartProps) {
             <CardFooter className="flex flex-col gap-6 text-base text-pebble">
                 <div className="flex flex-col gap-3">
                     {chartData.map((item) => (
-                        <div key={item.category} className="flex items-center gap-2">
-                            <div className="w-4 h-4 rounded-full" style={{ backgroundColor: item.fill }}></div>
+                        <div
+                            key={item.category}
+                            className="flex items-center gap-2"
+                        >
+                            <div
+                                className="w-4 h-4 rounded-full"
+                                style={{ backgroundColor: item.fill }}
+                            ></div>
                             <span>{item.category}:</span>
-                            <span>{item.value} ฿</span>
+                            <span>{item.value.toFixed(2)} ฿</span>
                         </div>
                     ))}
                 </div>
