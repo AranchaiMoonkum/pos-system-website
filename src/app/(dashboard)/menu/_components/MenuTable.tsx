@@ -54,14 +54,13 @@ const MenuTable = async () => {
             <TableBody>
                 {menus.map((menu) => (
                     <TableRow key={menu.id}>
-                        <TableCell className="font-medium flex gap-2 items-center">
+                        <TableCell className="flex justify-center">
                             <Avatar className="rounded-md">
                                 <AvatarImage className="rounded-md" src={menu.image} />
                                 <AvatarFallback className="rounded-md">
                                     <Sandwich />
                                 </AvatarFallback>
                             </Avatar>
-                            {menu.name}
                         </TableCell>
                         <TableCell>{menu.name}</TableCell>
                         <TableCell>{menu.category.name}</TableCell>
