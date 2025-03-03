@@ -174,7 +174,7 @@ const EditMenuForm = ({ menu, id }: { menu?: Menu | null, id: string }) => {
                         type="submit"
                         className="py-8 text-xl"
                     >
-                        Add Menu
+                        Edit Menu
                     </Button>
                 </div>
             </form>
