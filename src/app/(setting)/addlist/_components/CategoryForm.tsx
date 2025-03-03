@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
+import Swal from "sweetalert2"
 
 // ui
 import { Button } from "@/components/ui/button"
@@ -44,10 +45,22 @@ const CategoryForm = () => {
             if (!res.ok) {
                 setError(resData.message || "Failed to create category")
                 return
-            } else {
-                form.reset()
+            } Swal.fire({
+                toast: true,
+                position: "top-end",
+                icon: "success",
+                title: "Category placed successfully",
+                showConfirmButton: false,
+                timer: 1000, // 1 second
+                timerProgressBar: true,
+            })
+
+            form.reset()
+
+            setTimeout(() => {
                 location.reload()
-            }
+            }, 1000)
+            
         } catch (error) {
             console.log("Failed to create category. " + error)
             setError("Failed to create category. " + error)
