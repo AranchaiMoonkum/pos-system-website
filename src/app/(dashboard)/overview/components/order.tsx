@@ -32,7 +32,11 @@ async function getOrders() {
     const ordersAsc = await prisma.order.findMany({
         where: { userId: userId },
         include: {
-            items: true,
+            items: {
+                include: {
+                    menu: true,
+                },
+            },
         },
         orderBy: {
             createdAt: "asc",
@@ -42,7 +46,11 @@ async function getOrders() {
     // assign a stable order number based on creation order
     const numberedOrders = ordersAsc.map((order, index) => ({
         ...order,
-        orderNumber: index + 1
+        orderNumber: index + 1,
+        items: order.items.map((item) => ({
+            ...item,
+            menuName: item.menu?.name || "Unknown", // ensure menuName is set
+        })),
     }))
 
     const ordersDesc = numberedOrders.slice().reverse()
@@ -67,16 +75,16 @@ export default async function order() {
                 </TableHeader>
                 <TableBody>
                     {orders.map((order, index) => {
-                        // Calculate total number of items for the order
+                        // calculate total number of items for the order
                         const numberOfItems = order.items.reduce(
                             (acc, item) => acc + item.quantity,
                             0
-                        );
-                        // Calculate total price for the order (price * quantity for each item)
+                        )
+                        // calculate total price for the order (price * quantity for each item)
                         const totalPrice = order.items.reduce(
                             (acc, item) => acc + item.price * item.quantity,
                             0
-                        );
+                        )
                         return (
                             <Dialog key={order.id}>
                                 <DialogTrigger asChild>

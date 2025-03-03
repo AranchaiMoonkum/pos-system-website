@@ -51,18 +51,7 @@ export default function OrderItemDialog({ order }: OrderItemDialogProps) {
                 <TableBody>
                     {order.items.map((item) => (
                         <TableRow key={item.id}>
-                            <TableCell>
-                                <div>
-                                    <span className="font-semibold">
-                                        {item.menuName}
-                                    </span>
-                                    {item.description && (
-                                        <p className="text-sm text-gray-500">
-                                            {item.description}
-                                        </p>
-                                    )}
-                                </div>
-                            </TableCell>
+                            <TableCell>{item.menuName}</TableCell>
                             <TableCell>{item.quantity}</TableCell>
                             <TableCell>฿{item.price.toFixed(2)}</TableCell>
                         </TableRow>
