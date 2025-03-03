@@ -77,7 +77,7 @@ export default function CheckOut() {
     return (
         <section className="w-4/12 relative">
             <div className="relative h-full">
-                <div className="bg-white h-5/6 rounded-xl sticky top-0">
+                <div className="bg-white h-[650px] rounded-xl sticky top-0">
                     <h2 className="text-2xl font-bold p-4">Checkout</h2>
                     <ScrollArea className="max-h-[400px] overflow-y-auto z-10">
                         <Table>
