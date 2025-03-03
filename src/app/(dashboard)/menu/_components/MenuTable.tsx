@@ -1,8 +1,8 @@
 import authOptions from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
 import { getServerSession } from "next-auth"
-import Image from "next/image"
 import Link from "next/link"
+
 import { DeteleDropdownItem } from "./MenuAction"
 
 // ui
@@ -16,8 +16,11 @@ import {
     TableCell
 } from "@/components/ui/table"
 
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+
 // icons
 import { EllipsisVertical } from "lucide-react"
+import { Sandwich } from "lucide-react"
 
 const getMenus = async () => {
     const session = await getServerSession(authOptions)
@@ -51,14 +54,14 @@ const MenuTable = async () => {
             <TableBody>
                 {menus.map((menu) => (
                     <TableRow key={menu.id}>
-                        <TableCell className="flex justify-center">
-                            <Image
-                                src={menu.image}
-                                alt={menu.name}
-                                width={150}
-                                height={150}
-                                className="rounded-md"
-                            />
+                        <TableCell className="font-medium flex gap-2 items-center">
+                            <Avatar className="rounded-md">
+                                <AvatarImage className="rounded-md" src={menu.image} />
+                                <AvatarFallback className="rounded-md">
+                                    <Sandwich />
+                                </AvatarFallback>
+                            </Avatar>
+                            {menu.name}
                         </TableCell>
                         <TableCell>{menu.name}</TableCell>
                         <TableCell>{menu.category.name}</TableCell>
